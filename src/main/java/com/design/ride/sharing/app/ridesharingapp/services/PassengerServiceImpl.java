@@ -5,20 +5,23 @@ import com.design.ride.sharing.app.ridesharingapp.dtos.UserResponseDto;
 import com.design.ride.sharing.app.ridesharingapp.enums.UserTypeEnum;
 import com.design.ride.sharing.app.ridesharingapp.models.Passenger;
 import com.design.ride.sharing.app.ridesharingapp.repositories.PassengerRepositoryImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PassengerServiceImpl {
 
-    @Autowired
+
     private PassengerRepositoryImpl passengerRepository;
+
+    public PassengerServiceImpl(PassengerRepositoryImpl passengerRepository) {
+        this.passengerRepository = passengerRepository;
+    }
 
     public UserResponseDto registerPassenger(UserRequestDto userRequestDto) {
 
         Passenger passenger = setPassengerDetails(userRequestDto);
         passengerRepository.save(passenger);
-        return convertpassengerIntoUserDetails(passenger);
+        return convertPassengerIntoUserDetails(passenger);
 
     }
 
@@ -32,7 +35,7 @@ public class PassengerServiceImpl {
         return passenger;
     }
 
-    private static UserResponseDto convertpassengerIntoUserDetails(Passenger passenger) {
+    private static UserResponseDto convertPassengerIntoUserDetails(Passenger passenger) {
         UserResponseDto userResponseDto = new UserResponseDto();
         userResponseDto.setName(passenger.getName());
         userResponseDto.setEmail(passenger.getEmail());

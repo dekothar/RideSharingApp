@@ -5,14 +5,16 @@ import com.design.ride.sharing.app.ridesharingapp.dtos.UserResponseDto;
 import com.design.ride.sharing.app.ridesharingapp.enums.UserTypeEnum;
 import com.design.ride.sharing.app.ridesharingapp.models.Driver;
 import com.design.ride.sharing.app.ridesharingapp.repositories.DriverRepositoryImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DriverServiceImpl {
 
-    @Autowired
     private DriverRepositoryImpl driverRepository;
+
+    public DriverServiceImpl(DriverRepositoryImpl driverRepository) {
+        this.driverRepository = driverRepository;
+    }
 
     public UserResponseDto registerDriver(UserRequestDto userRequestDto) {
 
